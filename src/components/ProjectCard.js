@@ -3,9 +3,9 @@ import { Card, Image, Button } from "semantic-ui-react";
 import { Link } from 'react-router-dom';
 import history from '../utils/history';
 import FormikEditForm from '../components/EditForm';
-const ProjectDetail = (props) => {
+const ProjectCard = (props) => {
     // console.log('props from projectDetail: ', props)
-    console.log('props', props)
+    console.log('Project Card props', props)
   const [editing, setEditing] = useState([])
 
 
@@ -16,19 +16,18 @@ const ProjectDetail = (props) => {
   
     return(
         <Card>
-            <Card.Header><h2>{props.title}</h2></Card.Header>
-            <Image src={props.image} alt="project-image" />
+            <Card.Header><h2>{props.project.project_title}</h2></Card.Header>
+            <Image src={props.project.image} alt="project-image" />
             <Card.Content>
                 <Card.Description>
-                    {props.description}
+                    {props.project.project_description}
                 </Card.Description>
             </Card.Content>
-            <FormikEditForm project={props} />
-           
-                <Button  style={{backgroundColor:'#011638', color: "#FBFCFF"}}>See and Edit Details</Button>
-              
+            <Link to ={`/details`} id={props.project.id}>
+                 <Button style={{backgroundColor:'#011638', color: "#FBFCFF"}}>See and Edit Details</Button>
+                 </Link>
         </Card>
     )
 }
 
-export default ProjectDetail;
+export default ProjectCard;

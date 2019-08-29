@@ -5,11 +5,11 @@ import { Button } from "semantic-ui-react";
 import history from '../utils/history';
 import UpdatedForm from "./UpdatedForm";
 
-function ProjectForm(){
-
+function EditForm(props){
+console.log('props', props);
     const [projectList, setProjectList] = useState([])
     const [newProject, SetNewProject] = useState([])
- 
+
     useEffect(() => {
         axiosWithAuth()
         .get('https://vr-funding-app.herokuapp.com/api/projects/1')
@@ -49,7 +49,7 @@ function ProjectForm(){
     );
 }
 
-const FormikProjectForm = withFormik({
+const FormikEditForm = withFormik({
     mapPropsToValues({ image, project_title, project_type, mission_statement, project_description, funding_amount, project_timeline, project_assets, founders_id }){
         return {
             image: image || "",
@@ -81,6 +81,6 @@ const FormikProjectForm = withFormik({
             
         });
     } 
-})(ProjectForm);
+})(EditForm);
 
-export default FormikProjectForm;
+export default FormikEditForm;

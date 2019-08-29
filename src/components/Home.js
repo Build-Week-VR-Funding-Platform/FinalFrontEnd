@@ -1,16 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { Link } from 'react-router-dom';
-import ProjectDetail from "./ProjectDetail";
 import { Button } from "semantic-ui-react";
 
 import axios from "axios";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
+import ProjectCard from "./ProjectCard";
 
 const Home = () => {
 
   const [projects, setProjects] = useState([])
   const [user, setUser] = useState([])
-
   useEffect(() => {
     axios
       .get('https://vr-funding-app.herokuapp.com/api/projects/public')
@@ -31,7 +30,7 @@ const Home = () => {
       </div>
       <h2>Explore projects</h2>
       <div className="card-container">
-      {projects.map(p => <ProjectDetail title={p.project_title} id={p.id} key={p.id} funding={p.project_funding} assets={p.assets} image={p.image} description={p.project_description}/>)}
+      {projects.map(p => <ProjectCard project={p} />)}
       </div>
     </div>
   );
