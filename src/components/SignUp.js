@@ -63,7 +63,7 @@ const FormikUserForm = withFormik({
       .post("https://vr-funding-app.herokuapp.com/api/auth/reg", values)
       .then(res => {
         console.log(res)
-        if(res.data.status===201){
+        if(res.status===201){
         history.push('/login')
         }
         // since were using axiosWithAuth we dont set token here, and this is the signup

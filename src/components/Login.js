@@ -51,7 +51,7 @@ const FormikLoginForm = withFormik({
       .then(res => {
         console.log(res)
         localStorage.setItem('token', res.data.token)
-        if(res.data.statusText==="OK"){
+        if(res.status===200){
           history.push('/');
         }
         // use axios and post user info to backend?
