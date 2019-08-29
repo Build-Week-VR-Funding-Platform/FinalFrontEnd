@@ -4,6 +4,8 @@ import { Button } from "semantic-ui-react";
 import axiosWithAuth from "../utils/axiosWithAuth";
 import ProjectDetail from "./ProjectDetail";
 
+import EditForm from "./EditForm";
+
 const Users = props => {
   // console.log('props from Users:', props)
 
@@ -30,7 +32,7 @@ const Users = props => {
       })
       .catch(err => console.log(err))
   }, [])
-
+  console.log('editform props gonna be: ', project)
   return (
     <div className="home-container">
       <h2>Welcome to VR-Funding-Platform</h2>
@@ -38,9 +40,17 @@ const Users = props => {
         <Link to="new-project"><Button style={{backgroundColor: "#40367C", color: "white"}}>Start projects</Button></Link>
         <Link to="/"><Button style={{backgroundColor: "#49C1A7", color: "white"}}>Discover projects</Button></Link>
       </div>
-      {user ? <h3>Hello, {user}</h3> : <h3>loading...</h3>}
+      {user ? <h3>Hello, {user}!</h3> : <h3>loading...</h3>}
       <div className="card-container">
-        {project ? project.map(p => <ProjectDetail title={p.project_title} id={p.id} key={p.id} funding={p.project_funding} assets={p.assets} image={p.image} description={p.project_description}/>) : null}
+        {project && project.map(p => {
+          return <Link to={`/project/${id}`}><ProjectDetail title={p.project_title} id={p.id} key={p.id} funding={p.project_funding} assets={p.assets} image={p.image} description={p.project_description}/></Link>
+        })} 
+      </div>
+      {project && project.map(p => {
+          return <Link to={`/project/${id}`}><EditForm props={project}/></Link>
+        })} 
+      <div>
+        {user && <Button>Log out</Button>}
       </div>
     </div>
   );
