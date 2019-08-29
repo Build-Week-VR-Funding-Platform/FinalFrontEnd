@@ -1,24 +1,32 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Router, Route } from 'react-router-dom';
+import PrivateRoute from "./utils/privateRoute";
+import history from './utils/history';
 
+import Header from './components/Header';
+import Home from './components/Home';
+import Users from './components/Users';
+import SignUp from './components/SignUp';
+import Login from './components/Login';
+
+import ProjectForm from './components/ProjectForm';
+import Founders from './components/Founders';
+
+//secure private routes 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header />
+      <Router history = {history}>
+
+      <Route path="/" exact component={Home} />
+      <PrivateRoute path="/users" component={Users} />
+      <Route path="/new-project" component={ProjectForm} />
+      <Route path="/founders" component={Founders} />
+      <Route exact path='/signup' render={(props) => <SignUp {...props} />} />
+      <Route exact path='/login' render={(props) => <Login {...props} />} />
+
+      </Router>
     </div>
   );
 }
