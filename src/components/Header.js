@@ -1,13 +1,22 @@
 import React from "react";
-import { Link } from 'react-router-dom';
+import history from '../utils/history';
 
 const Header = () => {
+
+  const pushHome = () => {
+    history.push('/');
+  }
+
+  const pushRoute = location => {
+    history.push(`/${location}`);
+  }
+
   return (
     <div className="nav">
-      <Link to="/" ><p>Home</p></Link>
-      <Link to="/login" ><p>Login</p></Link>
-      <Link to="/signup" ><p>Sign up</p></Link>
-      <Link to="/users" ><p>User</p></Link>
+      <a onClick={pushHome}>Home</a>
+      <a onClick={()=>pushRoute('login')}>Login</a>
+      <a onClick={()=>pushRoute('signup')}>Sign up</a>
+      <a onClick={()=>pushRoute('users')}>User</a>
     </div>
   );
 };
