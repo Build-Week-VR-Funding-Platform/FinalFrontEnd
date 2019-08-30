@@ -63,6 +63,7 @@ const FormikUserForm = withFormik({
       .post("https://vr-funding-app.herokuapp.com/api/auth/reg", values)
       .then(res => {
         console.log(res)
+        localStorage.setItem('id', res.data.id)
         if(res.status===201){
         history.push('/login')
         }

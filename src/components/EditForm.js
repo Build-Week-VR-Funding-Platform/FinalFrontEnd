@@ -5,14 +5,14 @@ import { Button } from "semantic-ui-react";
 import history from '../utils/history';
 import UpdatedForm from "./UpdatedForm";
 
-function ProjectForm(){
-    const id = localStorage.getItem("id")
+function EditForm(props){
+console.log('props', props);
     const [projectList, setProjectList] = useState([])
     const [newProject, SetNewProject] = useState([])
 
     useEffect(() => {
         axiosWithAuth()
-        .get(`https://vr-funding-app.herokuapp.com/api/projects/${id}`)
+        .get('https://vr-funding-app.herokuapp.com/api/projects/1')
         .then(res => {
             console.log(res)
             SetNewProject(res.data.project)
@@ -43,13 +43,12 @@ function ProjectForm(){
                 <p>Founder's ID number</p>                
                 <Field type = "number" name="founders_id" placeholder="ID number" />
                 <Button style={{backgroundColor: "#011638", color: "white"}} content="Submit Your Project!" />
-                {/* {newProject.length > 0 ? newProject.map(a=> <UpdatedForm projectList={a.project}/>) : null} */}
+                {newProject.length > 0 ? newProject.map(a=> <UpdatedForm projectList={a.project}/>) : null}
             </Form>
         </div>
     );
 }
-
-const FormikProjectForm = withFormik({
+const FormikEditForm = withFormik({
     mapPropsToValues({ image, project_title, project_type, mission_statement, project_description, funding_amount, project_timeline, project_assets, founders_id }){
         return {
             image: image || "",
@@ -60,10 +59,9 @@ const FormikProjectForm = withFormik({
             funding_amount: funding_amount || "32,453",
             project_timeline: project_timeline || "Start 1/20/2019, Estimated finish: 2/2-/2019",
             project_assets: project_assets || "",
-            founders_id: founders_id || localStorage.getItem("id"),
+            founders_id: founders_id || 1,
         };
     },
-
     handleSubmit(values){
         console.log(values)
         axiosWithAuth()
@@ -81,6 +79,6 @@ const FormikProjectForm = withFormik({
             
         });
     } 
-})(ProjectForm);
+})(EditForm);
 
-export default FormikProjectForm;
+export default FormikEditForm;
