@@ -26,9 +26,10 @@ code {
   margin: 0 0 20px 0;
 }
 
-.nav p {
+.nav a {
   font-size: 16px;
   color: black;
+  cursor: pointer;
 }
 
 li {

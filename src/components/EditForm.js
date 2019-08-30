@@ -5,17 +5,19 @@ import { Button } from "semantic-ui-react";
 import history from '../utils/history';
 import UpdatedForm from "./UpdatedForm";
 
+const id = localStorage.getItem('id');
+
 function EditForm(props){
-console.log('props', props);
+
     const [projectList, setProjectList] = useState([])
     const [newProject, SetNewProject] = useState([])
 
     useEffect(() => {
         axiosWithAuth()
-        .get('https://vr-funding-app.herokuapp.com/api/projects/1')
+        .get(`https://vr-funding-app.herokuapp.com/api/projects/${id}`)
         .then(res => {
-            console.log(res)
-            SetNewProject(res.data.project)
+            console.log('getting project by id: ', res)
+            //SetNewProject(res.data.project)
         })
         .catch(err => console.log(err))
     }, [])

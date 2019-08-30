@@ -11,6 +11,7 @@ import Login from './components/Login';
 
 import ProjectForm from './components/ProjectForm';
 import Founders from './components/Founders';
+import EditForm from './components/EditForm';
 
 //secure private routes 
 function App() {
@@ -25,7 +26,8 @@ function App() {
       <Route path="/founders" component={Founders} />
       <Route exact path='/signup' render={(props) => <SignUp {...props} />} />
       <Route exact path='/login' render={(props) => <Login {...props} />} />
-
+      <Route path="/project/:id" 
+        render={props => <EditForm {...props} />} />
       </Router>
     </div>
   );

@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Button } from "semantic-ui-react";
 import axiosWithAuth from "../utils/axiosWithAuth";
 import ProjectDetail from "./ProjectDetail";
-
+import { Route } from 'react-router-dom';
 import EditForm from "./EditForm";
 
 const Users = props => {
@@ -43,12 +43,13 @@ const Users = props => {
       {user ? <h3>Hello, {user}!</h3> : <h3>loading...</h3>}
       <div className="card-container">
         {project && project.map(p => {
-          return <Link to={`/project/${id}`}><ProjectDetail title={p.project_title} id={p.id} key={p.id} funding={p.project_funding} assets={p.assets} image={p.image} description={p.project_description}/></Link>
-        })} 
+          return <ProjectDetail title={p.project_title} id={p.id} key={p.id} funding={p.project_funding} assets={p.assets} image={p.image} description={p.project_description}/>
+        })}
+        <Link to={`/project/${id}`}><Button>Edit Project</Button></Link>
       </div>
-      {project && project.map(p => {
+      {/* {project && project.map(p => {
           return <Link to={`/project/${id}`}><EditForm props={project}/></Link>
-        })} 
+        })}  */}
       <div>
         {user && <Button>Log out</Button>}
       </div>
